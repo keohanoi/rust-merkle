@@ -1,13 +1,13 @@
 use util::hash_helper;
-use crate::merkle::{ MerkleTreeKeccak, MerkleTreeSha256 };
 pub mod util;
 pub mod merkle;
 
+#[test]
 fn main() {
   // Example usage:
   let hashes = vec![vec![0; 32], vec![1; 32], vec![2; 32], vec![3; 32]];
-  let tree_keccak = MerkleTreeKeccak::new(hashes.clone());
-  let tree_sha256 = MerkleTreeSha256::new(hashes.clone());
+  let tree_keccak = crate::merkle::MerkleTreeKeccak::new(hashes.clone());
+  let tree_sha256 = crate::merkle::MerkleTreeSha256::new(hashes.clone());
 
   println!("Root (Keccak): {:?}", tree_keccak.tree.root());
   println!("Root (SHA256): {:?}", tree_sha256.tree.root());
@@ -37,11 +37,11 @@ fn verify_proof() {
   
   for i in 0..vals.len() {
     let bytes = [vals[i].field1.as_bytes(), &vals[i].field2.to_string().as_bytes()].concat();
-    let hash = MerkleTreeKeccak::keccak256(&bytes);
+    let hash = crate::merkle::MerkleTreeKeccak::keccak256(&bytes);
     hashes.push(hash);
   }
   
-  let tree_keccak = MerkleTreeKeccak::new(hashes.clone());
+  let tree_keccak = crate::merkle::MerkleTreeKeccak::new(hashes.clone());
   let root_keccak = tree_keccak.tree.root();
   let proof_keccak = tree_keccak.tree.proofs(0); // Proof for the first element
 
@@ -51,7 +51,7 @@ fn verify_proof() {
     field2: 1,
   };
   let test_val_bytes = [test_val.field1.as_bytes(), &test_val.field2.to_string().as_bytes()].concat();
-  let leaf = MerkleTreeKeccak::keccak256(&test_val_bytes);
+  let leaf = crate::merkle::MerkleTreeKeccak::keccak256(&test_val_bytes);
   
   assert_eq!(_verify_proof(&proof_keccak, &root_keccak.hash.try_into().unwrap(), &leaf.try_into().unwrap()), true);
 }
