@@ -113,6 +113,14 @@ impl MerkleTreeKeccak {
     hasher.update(data);
     hasher.finalize().to_vec()
   }
+
+  pub fn keccak256_arr(vals: &[&[u8]]) -> Vec<u8> {
+    let mut hasher = Keccak256::new();
+    for val in vals {
+      hasher.update(val);
+    }
+    hasher.finalize().to_vec()
+  }
 }
 
 pub struct MerkleTreeSha256 {
