@@ -33,8 +33,7 @@ cargo test
 ## Finding the root of a Merkle tree
   
 ```rust
-pub mod merkle;
-use crate::merkle::{ MerkleTreeKeccak, MerkleTreeSha256 };
+use rust_merkle::merkle::{MerkleTreeKeccak, MerkleTreeSha256};
 
 fn main() {
   // Example usage:
@@ -49,8 +48,7 @@ fn main() {
 
 ## Built With Specific Struct
 ```rust
-use crate::merkle::{ MerkleTreeKeccak, MerkleTreeSha256 };
-pub mod merkle;
+use rust_merkle::merkle::{MerkleTreeKeccak, MerkleTreeSha256};
 
 pub struct TestStruct {
   pub field1: String,
