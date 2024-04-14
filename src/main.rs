@@ -34,11 +34,13 @@ fn verify_proof() {
     }
   ];
   let mut hashes: Vec<Vec<u8>> = vec![];
+  
   for i in 0..vals.len() {
     let bytes = [vals[i].field1.as_bytes(), &vals[i].field2.to_string().as_bytes()].concat();
     let hash = MerkleTreeKeccak::keccak256(&bytes);
     hashes.push(hash);
   }
+  
   let tree_keccak = MerkleTreeKeccak::new(hashes.clone());
   let root_keccak = tree_keccak.tree.root();
   let proof_keccak = tree_keccak.tree.proofs(0); // Proof for the first element
