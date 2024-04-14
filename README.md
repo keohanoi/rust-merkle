@@ -17,7 +17,7 @@ What things you need to install the software and how to install them:
 A step by step series of examples that tell you how to get a development environment running:
 
 ```bash
-git clone git@github.com:nguyentruongkhang22/rust-merkle.git
+git clone git@github.com:keohanoi/rust-merkle.git
 cd rust-merkle
 cargo build
 ```
